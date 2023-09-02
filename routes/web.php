@@ -16,6 +16,7 @@ use App\Http\Controllers\PostsController;
 */
 
 Route::get('/', [PagesController::class,'index']);
+Route::get('/create', [PostsController::class, 'create'])->name('posts.create');
 Route::resource('/blog',PostsController::class);
 require __DIR__.'/auth.php';
 

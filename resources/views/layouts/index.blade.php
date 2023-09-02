@@ -32,7 +32,14 @@
         </div>
     </nav>
 
-
+        @if(Auth::check())
+        <div class='pt-15 w-4/5 m-auto'>
+            <a href='create' class='bg-blue-500  mt-6 uppercase bg-transparent text-gray-100 px-5 text-xs 
+            font-extrabold py-3 rounded-3xl'>
+                Create post
+            </a>
+        </div>
+        @endif
     <div class="container mx-auto flex flex-wrap py-6">
 
         <!-- Posts Section -->
