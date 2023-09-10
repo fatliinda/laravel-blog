@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Str;
+
+
+
 
 class PostsController extends Controller
 {
@@ -36,11 +40,41 @@ class PostsController extends Controller
             'description' => 'required',
             'image' => 'required|mimes:jpg,png,jpeg|max:5048'
         ]);
-        
+    
+        // Move the uploaded image
         $newImageName = uniqid() . '-' . $request->title . '.' . $request->image->extension();
-       $request->image->move(public_path('images'),$newImageName);
-       
-        
+        $request->image->move(public_path('images'), $newImageName);
+    
+        if (auth()->check()) {
+            // User is logged in, assign the user_id
+            $user_id = auth()->user()->id;
+        } else {
+            // User is not logged in, set user_id to null or some default value
+            $user_id = null; // or set it to some default user ID
+        }
+        // Create a new Post
+        $post = new Post();
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->user_id = $user_id; // Set the user_id
+        $post->image_path = $newImageName;
+        $post->save();
+    
+        $post->slug = Str::slug($post->title);
+    $post->save();
+
+   Post::create([
+    'title'=>$request->input('title'),
+    'description'=>$request->input('description'),
+    'slug'=> Str::slug($post->title),
+    'image_path'=> $newImageName,
+    'user_id'=>auth()->user()->id
+
+
+
+   ]);
+   return redirect('/')
+   ->with('message','your post has been added!');
     }
 
     /**

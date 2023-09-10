@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('slug');
+            $table->string('slug')->unique()->nullable();
             $table->string('title');
             $table->longText('description');
             $table->string('image_path'); // Fixed typo here

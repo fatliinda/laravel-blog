@@ -31,7 +31,13 @@
             </div>
         </div>
     </nav>
-
+        @if(session()->has('message'))
+            <div class="w-4/5 m-auto mt-10 pl-20">
+                <p class="w-2/6 mb-4 bg-green-500 rounded-2xl">
+                    {{session()->get('message')}}
+                </p>
+            </div>
+        @endif
         @if(Auth::check())
         <div class='pt-15 w-4/5 m-auto'>
             <a href='create' class='bg-blue-500  mt-6 uppercase bg-transparent text-gray-100 px-5 text-xs 
