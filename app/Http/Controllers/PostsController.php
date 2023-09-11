@@ -80,32 +80,47 @@ class PostsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    
+    public function show(string $slug)
     {
-        //
+        return view('layouts.show')
+        ->with('post',Post::where('slug',$slug)->first());
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $slug)
     {
-        //
+        return view('layouts.edit')
+        ->with('post',Post::where('slug',$slug)->first());
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $slug)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required']);
+
+        Post::where('slug',$slug)
+        ->update(['title'=>$request->input('title'),
+        'description'=>$request->input('description'),
+        'user_id'=>auth()->user()->id]);
+
+        return redirect('/blog')->with('message','your post has been updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $slug)
     {
-        //
+        $post=Post::where('slug',$slug);
+        $post->delete();
+        return redirect('/blog')->with('message','your post has been updated');
     }
 }

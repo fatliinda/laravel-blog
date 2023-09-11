@@ -44,6 +44,7 @@
             font-extrabold py-3 rounded-3xl'>
                 Create post
             </a>
+            
         </div>
         @endif
     <div class="container mx-auto flex flex-wrap py-6">
@@ -63,7 +64,7 @@
                         By <a href="#" class="font-semibold hover:text-gray-800">David Grzyb</a>, Published on April 25th, 2020
                     </p>
                     <a href="#" class="pb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis porta dui. Ut eu iaculis massa. Sed ornare ligula lacus, quis iaculis dui porta volutpat. In sit amet posuere magna..</a>
-                    <a href="#" class="uppercase text-gray-800 hover:text-black">Continue Reading <i class="fas fa-arrow-right"></i></a>
+                    <a href="layouts.show" class="uppercase text-gray-800 hover:text-black">Continue Reading <i class="fas fa-arrow-right"></i></a>
                 </div>
             </article>
 
